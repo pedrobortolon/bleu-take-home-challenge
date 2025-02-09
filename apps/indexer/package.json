@@ -1,0 +1,15 @@
+{
+  "name": "indexer",
+  "private": true,
+  "scripts": {
+    "dev": "ponder dev",
+    "build": "ponder build",
+    "start": "ponder start",
+    "test": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "deploy": "",
+    "clean": "rm -rf .ponder node_modules"
+  }
+}

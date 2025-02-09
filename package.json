@@ -1,0 +1,43 @@
+{
+  "name": "bleu-nft-challenge",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel -r dev",
+    "dev:web": "pnpm --filter web dev",
+    "dev:indexer": "pnpm --filter indexer dev",
+    "dev:anvil": "pnpm --filter contracts anvil",
+    "build": "pnpm -r build",
+    "build:web": "pnpm --filter web build",
+    "build:indexer": "pnpm --filter indexer build",
+    "build:contracts": "pnpm --filter contracts build",
+    "test": "pnpm -r test",
+    "test:web": "pnpm --filter web test",
+    "test:indexer": "pnpm --filter indexer test",
+    "test:contracts": "pnpm --filter contracts test",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix",
+    "typecheck": "pnpm -r typecheck",
+    "contracts:build": "pnpm --filter contracts build",
+    "contracts:test": "pnpm --filter contracts test",
+    "contracts:deploy": "pnpm --filter contracts deploy",
+    "contracts:deploy:testnet": "pnpm --filter contracts deploy:testnet",
+    "setup:env": "node scripts/setup-env.js",
+    "deploy:web": "pnpm --filter web deploy",
+    "deploy:indexer": "pnpm --filter indexer deploy",
+    "deploy:contracts": "pnpm --filter contracts deploy:testnet",
+    "clean": "pnpm -r clean && rm -rf node_modules"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "prettier": "^3.0.0",
+    "eslint": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}
