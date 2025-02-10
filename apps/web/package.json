@@ -1,13 +1,12 @@
 {
-  "name": "web",
+  "name": "@bleu-builders/tech-challenge-web",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "test": "jest",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
+    "check": "biome check --write .",
     "typecheck": "tsc --noEmit",
     "deploy": "",
     "clean": "rm -rf .next node_modules"
@@ -28,12 +27,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@eslint/eslintrc": "^3",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.6",
     "postcss": "^8",
     "tailwindcss": "^4.0.5",
     "typescript": "^5"

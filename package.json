@@ -1,5 +1,5 @@
 {
-  "name": "bleu-nft-challenge",
+  "name": "@bleu-builders/tech-challenge",
   "private": true,
   "scripts": {
     "dev": "pnpm --parallel -r dev",
@@ -14,8 +14,7 @@
     "test:web": "pnpm --filter web test",
     "test:indexer": "pnpm --filter indexer test",
     "test:contracts": "pnpm --filter contracts test",
-    "lint": "pnpm -r lint",
-    "lint:fix": "pnpm -r lint:fix",
+    "check": "pnpm -r check",
     "typecheck": "pnpm -r typecheck",
     "contracts:build": "pnpm --filter contracts build",
     "contracts:test": "pnpm --filter contracts test",
@@ -33,12 +32,11 @@
   "devDependencies": {
     "@types/node": "^22.13.1",
     "typescript": "^5.7.3",
-    "prettier": "^3.5.0",
-    "eslint": "^9.20.0"
+    "@biomejs/biome": "1.9.4"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "pnpm": ">=8.0.0"
+    "node": ">=20.0.0",
+    "pnpm": ">=10.0.0"
   },
   "packageManager": "pnpm@10.2.1"
 }

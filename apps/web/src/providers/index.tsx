@@ -1,7 +1,7 @@
-"use client";
-import type { ReactNode } from "react";
-import { Web3Provider } from "./web3-provider";
-import { ThemeProvider } from "./theme-proviver";
+'use client';
+import type { ReactNode } from 'react';
+import { ThemeProvider } from './theme-proviver';
+import { Web3Provider } from './web3-provider';
 
 interface ProvidersProps {
   children: ReactNode;

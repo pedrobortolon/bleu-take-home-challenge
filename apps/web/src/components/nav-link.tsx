@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import type React from "react";
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import type React from 'react';
 
 interface NavLinkProps {
   href: string;
@@ -16,10 +16,7 @@ export default function NavLink({ href, children }: NavLinkProps) {
   return (
     <Link
       href={href}
-      className={cn(
-        "text-content-foreground hover:text-primary/80",
-        isActive && "text-primary ",
-      )}
+      className={cn('text-content-foreground hover:text-primary/80', isActive && 'text-primary ')}
     >
       {children}
     </Link>

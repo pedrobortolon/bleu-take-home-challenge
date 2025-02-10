@@ -21,42 +21,53 @@ Welcome to the **Bleu** challenge! This monorepo contains a full-stack dapp impl
 
 ### Prerequisites
 
-- Node.js 18+
-- pnpm (`npm install -g pnpm`)
+- Node.js 20.9+ (with corepack enabled)
 
-### Installation
-
-1. Install dependencies:
+### Quick Start
 
 ```bash
+# Enable corepack (if not already enabled)
+corepack enable
+
+# Enable pnpm (one-time setup)
+corepack prepare pnpm@10.2.1 --activate
+
+# Install dependencies
 pnpm install
-```
 
-2. Set up environment variables:
-
-```bash
+# Set up environment variables
 pnpm setup:env
-```
 
-### Development
-
-Start all services in development mode:
-
-```bash
+# Start all services in development mode
 pnpm dev
 ```
 
-Or start individual services:
+### Development Commands
 
 ```bash
-# Frontend only
-pnpm dev:web
+# Start individual services
+pnpm dev:web        # Start frontend
+pnpm dev:indexer    # Start indexer
+pnpm dev:anvil      # Start local blockchain
 
-# Indexer only
-pnpm dev:indexer
+# Build
+pnpm build          # Build all packages
+pnpm build:web      # Build frontend only
+pnpm build:indexer  # Build indexer only
+pnpm build:contracts # Build contracts only
 
-# Local blockchain node
-pnpm dev:anvil
+# Test
+pnpm test           # Run all tests
+pnpm test:web       # Run frontend tests
+pnpm test:indexer   # Run indexer tests
+pnpm test:contracts # Run contract tests
+
+# Linting & Formatting
+pnpm check         # Check code style and format
+pnpm typecheck     # Run type checking
+
+# Clean
+pnpm clean         # Clean all build artifacts
 ```
 
 ### Smart Contracts

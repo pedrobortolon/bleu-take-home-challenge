@@ -29,10 +29,11 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install pnpm
+      - name: Enable corepack
+        run: corepack enable
+
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - name: Get pnpm store directory
         shell: bash
@@ -74,9 +75,7 @@ jobs:
           node-version: 20
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 9
+        uses: pnpm/action-setup@v4
 
       - name: Get pnpm store directory
         shell: bash
@@ -96,7 +95,8 @@ jobs:
 
       # Run linting
       - name: Run linting
-        run: pnpm lint
+        run: |
+          pnpm check
 
       # Run type checking
       - name: Run type checking

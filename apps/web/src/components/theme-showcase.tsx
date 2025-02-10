@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useThemeStore } from "@/store/useThemeStore";
-import React from "react";
-import { Button } from "./ui/button";
+import { useThemeStore } from '@/store/useThemeStore';
+import React from 'react';
+import { Button } from './ui/button';
 
 export default function ThemeShowcase() {
   const { theme, toggleTheme } = useThemeStore();
@@ -10,9 +10,7 @@ export default function ThemeShowcase() {
   return (
     <div className="flex flex-1 min-h-screen">
       <div className="flex flex-col gap-6 items-center p-8 justify-center flex-1 ">
-        <h1 className="text-2xl font-bold text-foreground mb-4">
-          Theme Color Showcase
-        </h1>
+        <h1 className="text-2xl font-bold text-foreground mb-4">Theme Color Showcase</h1>
 
         <div className="flex flex-col items-center gap-2">
           <p className="text-lg text-foreground">Current theme: {theme}</p>
@@ -27,23 +25,17 @@ export default function ThemeShowcase() {
         <section className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl">
           <div className="bg-background p-6 rounded-lg border border-foreground/10">
             <h2 className="font-bold text-foreground mb-2">Background</h2>
-            <p className="text-foreground/70">
-              Background with foreground text
-            </p>
+            <p className="text-foreground/70">Background with foreground text</p>
           </div>
 
           <div className="bg-primary p-6 rounded-lg">
             <h2 className="font-bold text-primary-foreground mb-2">Primary</h2>
-            <p className="text-primary-foreground/70">
-              Primary with its foreground
-            </p>
+            <p className="text-primary-foreground/70">Primary with its foreground</p>
           </div>
 
           <div className="bg-content p-6 rounded-lg">
             <h2 className="font-bold text-content-foreground mb-2">Content</h2>
-            <p className="text-content-foreground/70">
-              Content with its foreground
-            </p>
+            <p className="text-content-foreground/70">Content with its foreground</p>
           </div>
 
           <div className="p-6 rounded-lg border border-sub-text">
