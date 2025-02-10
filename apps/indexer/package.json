@@ -3,9 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "ponder dev",
-    "build": "ponder build",
     "start": "ponder start",
-    "test": "vitest",
     "check": "biome check --write .",
     "typecheck": "tsc --noEmit",
     "deploy": "",
