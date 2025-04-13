@@ -1,5 +1,5 @@
 import { ponder } from 'ponder:registry';
 
-// ponder.on("YourContract:YourEvent", (event) => {
-//   console.log(event);
-// });
+ponder.on("BleuNFT:Mint", (event) => {
+  console.log(event);
+});

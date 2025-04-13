@@ -2,6 +2,7 @@ import { createConfig } from 'ponder';
 import { http } from 'viem';
 
 import { ExampleContractAbi } from './abis/ExampleContractAbi';
+import { BleuNFTAbi } from './abis/BleuNFTAbi';
 
 export default createConfig({
   networks: {
@@ -12,13 +13,22 @@ export default createConfig({
     },
   },
   contracts: {
-    ExampleContract: {
+    // ExampleContract: {
+    //   network: 'anvil_localhost_testnet',
+    //   // TODO: Replace with the actual abi of the contract
+    //   // Note: You'll probably want to use a mergeAbis function to merge the abi with the erc721 abi
+    //   abi: ExampleContractAbi,
+    //   // TODO: Replace with the actual address of the contract
+    //   address: '0x0000000000000000000000000000000000000000',
+    //   startBlock: 1,
+    // },
+    BleuNFT: {
       network: 'anvil_localhost_testnet',
       // TODO: Replace with the actual abi of the contract
       // Note: You'll probably want to use a mergeAbis function to merge the abi with the erc721 abi
-      abi: ExampleContractAbi,
+      abi: BleuNFTAbi,
       // TODO: Replace with the actual address of the contract
-      address: '0x0000000000000000000000000000000000000000',
+      address: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
       startBlock: 1,
     },
   },
