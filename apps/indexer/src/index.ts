@@ -1,17 +1,42 @@
 import { ponder } from 'ponder:registry';
+import { accounts, tokens, events } from "../ponder.schema"
 
-ponder.on("BleuNFT:Mint", (event) => {
-  console.log(event);
+
+ponder.on("BleuNFT:Mint", async ({event, context}) => {
+  console.log(event)
 });
 
-ponder.on("FullBleuNFT:NFTMinted", (event) => {
-  console.log(event);
+ponder.on("FullBleuNFT:NFTMinted", async ({event, context}) => {
+  console.log(event)
+  const accountRow = await context.db.insert(accounts).values({
+    address: event.args.to,
+  });
+
+  const tokenRow = await context.db.insert(tokens).values({
+    id: event.args.tokenId,
+    owner: event.args.to,
+    staked: false
+  });
+
+  const eventRow = await context.db.insert(events).values({
+    id: event.log.id,
+    event: event.name,
+    token: event.args.tokenId
+  });
 });
 
-ponder.on("FullBleuNFT:NFTStaked", (event) => {
-  console.log(event);
+ponder.on("FullBleuNFT:NFTStaked", async ({event, context}) => {
+  const eventRow = await context.db.insert(events).values({
+    id: event.log.id,
+    event: event.name,
+    token: event.args.tokenId
+  });
 });
 
-ponder.on("FullBleuNFT:NFTUnstaked", (event) => {
-  console.log(event);
+ponder.on("FullBleuNFT:NFTUnstaked", async ({event, context}) => {
+  const eventRow = await context.db.insert(events).values({
+    id: event.log.id,
+    event: event.name,
+    token: event.args.tokenId
+  });
 });
