@@ -1,10 +1,12 @@
-import { placeholder } from "@bleu-builders/tech-challenge-ui";
+import MintNFTButton from '@/components/mint-nft-button';
+import NFTInfo from '@/components/nft-info';
+import { placeholder } from '@bleu-builders/tech-challenge-ui';
 
 export default function Home() {
   return (
     <div>
-      <h1>Hello World</h1>
-      <p>{placeholder ? "true" : "false"}</p>
+      <MintNFTButton />
+      <NFTInfo />
     </div>
   );
 }

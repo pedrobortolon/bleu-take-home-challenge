@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ConnectKitProvider, getDefaultConfig } from 'connectkit';
 import type { ReactNode } from 'react';
 import { http, WagmiProvider, createConfig } from 'wagmi';
-import { arbitrum, base, mainnet, optimism, polygon, sepolia } from 'wagmi/chains';
+import { anvil, arbitrum, base, mainnet, optimism, polygon, sepolia } from 'wagmi/chains';
 
 const walletConnectProjectId = '';
 
@@ -14,6 +14,7 @@ const config = createConfig(
     chains: [
       // mainnet, optimism, arbitrum, base, polygon,
       sepolia,
+      anvil,
     ],
     transports: {
       // [mainnet.id]: http(process.env.NEXT_PUBLIC_MAINNET_RPC_URL ?? ""),
@@ -22,6 +23,7 @@ const config = createConfig(
       // [base.id]: http(process.env.NEXT_PUBLIC_BASE_RPC_URL ?? ""),
       // [polygon.id]: http(process.env.NEXT_PUBLIC_POLYGON_RPC_URL ?? ""),
       [sepolia.id]: http(process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL ?? ''),
+      [31337]: http('http://localhost:8545'),
     },
 
     // Required API Keys
