@@ -31,6 +31,10 @@ ponder.on("FullBleuNFT:NFTStaked", async ({event, context}) => {
     event: event.name,
     token: event.args.tokenId
   });
+
+  const tokenRow = await context.db
+    .update(tokens, { id: event.args.tokenId })
+    .set({ staked: true });
 });
 
 ponder.on("FullBleuNFT:NFTUnstaked", async ({event, context}) => {
@@ -39,4 +43,8 @@ ponder.on("FullBleuNFT:NFTUnstaked", async ({event, context}) => {
     event: event.name,
     token: event.args.tokenId
   });
+
+  const tokenRow = await context.db
+    .update(tokens, { id: event.args.tokenId })
+    .set({ staked: false });
 });
