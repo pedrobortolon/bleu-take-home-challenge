@@ -11,10 +11,10 @@ export default function MintNFTButton() {
     e.preventDefault();
     console.log('passou aqui');
     writeContract({
-      address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
-      FullBleuNFTAbi,
+      address: '0xBe63Eb46a54aead7EC70D16e0A2c85a0C7Cf16E2',
+      abi: FullBleuNFTAbi,
       functionName: 'mintNFT',
-      args: [],
+      args: ["0x778F609Ae977B633a0FEC8832b0Bb781ad0Fd819"],
     });
   }
 

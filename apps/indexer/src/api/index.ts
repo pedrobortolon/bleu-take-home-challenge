@@ -30,6 +30,19 @@ app.get("/tokens/:address", async (c) => {
     return c.json(tokens);
 });
 
+app.get("/tokens/id/address/:address", async (c) => {
+  const address = getAddress(c.req.param("address"));
+
+  const tokens = await db
+    .select({tokenId: schema.tokens.id})
+    .from(schema.tokens)
+    .where(eq(schema.tokens.owner, address));
+
+  const tokenIds = tokens.map((t) => t.tokenId);
+
+  return c.json(tokenIds);
+});
+
 app.get("/tokens/:address/staked", async (c) => {
     const address = getAddress(c.req.param("address"));
 
@@ -60,6 +73,21 @@ app.get("/tokens/:address/unstaked", async (c) => {
         );
 
     return c.json(tokens);
+});
+
+app.get("/tokens/id/:id", async (c) => {
+  const id = c.req.param("id");
+
+  const [token] = await db
+    .select()
+    .from(schema.tokens)
+    .where(eq(schema.tokens.id, id));
+
+  if (!token) {
+    return c.notFound(); // or: return c.json({ error: "Token not found" }, 404);
+  }
+
+  return c.json(token);
 });
 
 app.get("/events/token/:id", async (c) => {

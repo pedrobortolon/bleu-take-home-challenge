@@ -6,7 +6,8 @@ import "../src/FullBleuNFT.sol";
 
 contract DeployFullBleuNFT is Script {
     function run() external {
-        vm.startBroadcast();
+        uint256 deployerKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerKey);
 
         FullBleuNFT nft = new FullBleuNFT("FullBleu", "FBNFT");
 

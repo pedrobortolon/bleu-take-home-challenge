@@ -55,8 +55,6 @@ contract FullBleuNFT is ERC721, Ownable {
             }
         }
 
-        // delete stakedBalances[msg.sender]; ask about this
-
         _transfer(address(this), owner, _tokenId);
 
         emit NFTUnstaked(_tokenId, msg.sender);

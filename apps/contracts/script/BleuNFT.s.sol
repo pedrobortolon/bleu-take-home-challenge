@@ -10,7 +10,8 @@ contract BleuNFTScript is Script {
     function setUp() public {}
 
     function run() public {
-        vm.startBroadcast();
+        uint256 deployerKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerKey);
 
         nft = new BleuNFT();
         nft.mint(msg.sender, 1);

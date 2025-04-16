@@ -10,7 +10,7 @@ ponder.on("FullBleuNFT:NFTMinted", async ({event, context}) => {
   console.log(event)
   const accountRow = await context.db.insert(accounts).values({
     address: event.args.to,
-  });
+  }).onConflictDoNothing();
 
   const tokenRow = await context.db.insert(tokens).values({
     id: event.args.tokenId,

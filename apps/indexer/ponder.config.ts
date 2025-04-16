@@ -20,7 +20,7 @@ export default createConfig({
       network: 'anvil_localhost_testnet',
       // Note: You'll probably want to use a mergeAbis function to merge the abi with the erc721 abi
       abi: BleuNFTAbi,
-      address: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+      address: '0x2415e8Caf540596F68ab85D83FDD60B1439A85d8',
       startBlock: 0,
     },
     FullBleuNFT: {
