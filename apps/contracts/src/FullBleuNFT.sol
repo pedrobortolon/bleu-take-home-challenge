@@ -27,7 +27,6 @@ contract FullBleuNFT is ERC721, Ownable {
 
     function stake(uint256 _tokenId) public {
         require(ownerOf(_tokenId) == msg.sender, "You do not own this NFT.");
-        require(!isStaked[_tokenId], "This NFT is already staked.");
 
         _transfer(msg.sender, address(this), _tokenId);
 
@@ -39,8 +38,8 @@ contract FullBleuNFT is ERC721, Ownable {
     }
 
     function unstake(uint256 _tokenId) public {
-        require(stakedNFTs[_tokenId] == msg.sender, "This NFT is not staked by you.");
         require(isStaked[_tokenId], "This NFT is not currently staked.");
+        require(stakedNFTs[_tokenId] == msg.sender, "This NFT is not staked by you.");
 
         address owner = stakedNFTs[_tokenId];
 
