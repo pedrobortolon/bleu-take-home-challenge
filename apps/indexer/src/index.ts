@@ -15,13 +15,14 @@ ponder.on("FullBleuNFT:NFTMinted", async ({event, context}) => {
   const tokenRow = await context.db.insert(tokens).values({
     id: event.args.tokenId,
     owner: event.args.to,
-    staked: false
+    staked: false,
   });
 
   const eventRow = await context.db.insert(events).values({
     id: event.log.id,
     event: event.name,
-    token: event.args.tokenId
+    token: event.args.tokenId,
+    timestamp: event.block.timestamp,
   });
 });
 
@@ -29,7 +30,8 @@ ponder.on("FullBleuNFT:NFTStaked", async ({event, context}) => {
   const eventRow = await context.db.insert(events).values({
     id: event.log.id,
     event: event.name,
-    token: event.args.tokenId
+    token: event.args.tokenId,
+    timestamp: event.block.timestamp,
   });
 
   const tokenRow = await context.db
@@ -41,7 +43,8 @@ ponder.on("FullBleuNFT:NFTUnstaked", async ({event, context}) => {
   const eventRow = await context.db.insert(events).values({
     id: event.log.id,
     event: event.name,
-    token: event.args.tokenId
+    token: event.args.tokenId,
+    timestamp: event.block.timestamp,
   });
 
   const tokenRow = await context.db

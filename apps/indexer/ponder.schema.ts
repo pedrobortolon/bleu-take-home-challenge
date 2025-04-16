@@ -18,7 +18,7 @@ export const tokens = onchainTable('tokens',
   (t) => ({
     id: t.integer().primaryKey(),
     owner: t.hex().notNull(),
-    staked: t.boolean().notNull()
+    staked: t.boolean().notNull(),
   }),
   (table) => ({
     idIdx: index().on(table.id),
@@ -35,7 +35,8 @@ export const events = onchainTable('events',
   (t) => ({
       id: t.text().primaryKey(),
       event: t.text().notNull(),
-      token: t.integer().notNull()
+      token: t.integer().notNull(),
+      timestamp: t.integer().notNull(),
     }),
   (table) => ({
     idIdx: index().on(table.id),
