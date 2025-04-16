@@ -13,7 +13,7 @@ This directory contains the smart contract implementation for the Bleu NFT staki
 
 The main contract `BleuNFT` inherits from OpenZeppelin's ERC721 and implements:
 
-- `mint()`: Allows users to mint new NFTs
+- `mintNFT()`: Allows users to mint new NFTs
 - `stake()`: Enables NFT staking
 - `unstake()`: Allows withdrawal of staked NFTs
 
@@ -97,7 +97,7 @@ Use Cast to interact with deployed contracts:
 
 ```bash
 # Mint an NFT
-cast send --rpc-url <rpc_url> --private-key <private_key> <contract_address> "mint()"
+cast send --rpc-url <rpc_url> --private-key <private_key> <contract_address> "mintNFT()"
 
 # Stake an NFT
 cast send --rpc-url <rpc_url> --private-key <private_key> <contract_address> "stake(uint256)" <token_id>

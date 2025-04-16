@@ -31,7 +31,7 @@ export default function StakeNFTButton({ token, onComplete }) {
     e.preventDefault();
     setAction('stake');
     writeContract({
-      address: '0xBe63Eb46a54aead7EC70D16e0A2c85a0C7Cf16E2',
+      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: FullBleuNFTAbi,
       functionName: 'stake',
       args: [token.id],
@@ -42,7 +42,7 @@ export default function StakeNFTButton({ token, onComplete }) {
     e.preventDefault();
     setAction('unstake');
     writeContract({
-      address: '0xBe63Eb46a54aead7EC70D16e0A2c85a0C7Cf16E2',
+      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
       abi: FullBleuNFTAbi,
       functionName: 'unstake',
       args: [token.id],

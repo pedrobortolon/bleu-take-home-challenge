@@ -33,7 +33,7 @@ const config = createConfig(
     appName: 'Next Bleu Starter',
     // Optional App Info
     appDescription: 'Template for web3 next projects',
-    appUrl: 'http://localhost:3000',
+    appUrl: process.env.APP_URL,
     appIcon: 'https://cdn-icons-png.flaticon.com/128/4064/4064205.png',
   })
 );

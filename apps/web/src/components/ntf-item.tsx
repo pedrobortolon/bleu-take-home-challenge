@@ -11,7 +11,7 @@ export default function NFTItem({ tokenId }) {
   async function fetchToken() {
     try {
       setIsLoading(true);
-      const response = await axios.get(`http://localhost:42070/tokens/id/${tokenId}`);
+      const response = await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL + `/tokens/id/${tokenId}`);
       setToken(response.data);
     } catch (error) {
       console.error("Error fetching token:", error);
