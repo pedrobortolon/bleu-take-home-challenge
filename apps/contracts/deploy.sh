@@ -12,5 +12,4 @@ if [ -z "$RPC_URL" ]; then
 fi
 
 # Run the scripts with the private key and RPC URL from the environment
-forge script script/BleuNFT.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
 forge script script/FullBleuNFT.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
