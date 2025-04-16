@@ -12,7 +12,7 @@ export default function NFTInfo() {
 
         const fetchTokens = async () => {
         try {
-            const response = await axios.get(`http://localhost:42069/addresstokens/${address}`);
+            const response = await axios.get(`http://localhost:42069/tokens/${address}`);
             console.log(response.data)
             setTokens(response.data);
         } catch (error) {
