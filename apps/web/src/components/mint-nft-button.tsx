@@ -40,12 +40,12 @@ export default function MintNFTButton() {
   }
 
   return (
-    <>
-      <Button onClick={mint} type="button" className="py-2 px-4 rounded-lg" disabled={loading}>
+    <div className="flex flex-col items-center gap-2">
+      <Button onClick={mint} type="button" className="text-lg text-foreground px-4 py-2 bg-primary text-primary-foreground rounded-md hover:opacity-90 transition-opacity" disabled={loading}>
         Mint
       </Button>
       {loading && <span className="ml-2">Minting...</span>}
       {error && <div className="text-red-500">Error: {error}</div>}
-    </>
+    </div>
   );
 }
