@@ -1,10 +1,11 @@
 'use client'
-import NFTItem from "./ntf-item";
+import { useAccount } from 'wagmi';
 import { useEffect, useState } from "react"
+import NFTItem from "./ntf-item";
 import axios from "axios";
 
 export default function NFTInfo() {
-    const address = "0x778F609Ae977B633a0FEC8832b0Bb781ad0Fd819";
+    const { address } = useAccount();
     const [tokenIds, setTokens] = useState([]);
 
     useEffect(() => {
