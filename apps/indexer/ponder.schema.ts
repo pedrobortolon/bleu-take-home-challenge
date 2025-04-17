@@ -3,7 +3,7 @@ import { index, onchainTable, relations } from 'ponder';
 export const accounts = onchainTable('accounts',
   (t) => ({
     address: t.hex().primaryKey(),
-    total_staked: t.integer().notNull(),
+    totalStaked: t.integer().notNull(),
     attestationUID : t.hex(),
   }),
   (table) => ({

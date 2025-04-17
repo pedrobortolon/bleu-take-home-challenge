@@ -7,7 +7,7 @@ const eas = new EAS(easContractAddress);
 const provider = new JsonRpcProvider(process.env.PONDER_SEPOLIA_RPC_URL!);
 const signer = new Wallet(process.env.PRIVATE_KEY!, provider);
 
-export const issueAttestation = async ({ recipient, level, reason }) => {
+const issueAttestation = async ({ recipient, level, reason }) => {
 
 	await eas.connect(signer);
 
@@ -29,8 +29,21 @@ export const issueAttestation = async ({ recipient, level, reason }) => {
 	return newAttestationUID;
 };
 
-export const revokeAttestation = async ({ attestationUID }) => {
+const revokeAttestation = async ({ attestationUID }) => {
 	await eas.connect(signer);
 	const tx = await eas.revoke({ uid: attestationUID });
 	await tx.wait();
+}
+
+export const manageAccountAttestation = async ({ account, newTotalStaked }) => {
+	if (account.attestationUID) {
+		revokeAttestation(account.attestationUID)
+	}
+	const newAttestationUID = issueAttestation({
+		recipient: account.address,
+		level: "level " + newTotalStaked + " staker",
+		reason: "staked " + newTotalStaked + " NFT's" ,
+	})
+
+	return newAttestationUID
 }

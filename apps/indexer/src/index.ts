@@ -1,6 +1,6 @@
 import { ponder } from 'ponder:registry';
 import { accounts, tokens, events } from "../ponder.schema"
-import { issueAttestation, revokeAttestation } from "./eas_atestation"
+import { manageAccountAttestation } from "./eas_atestation"
 
 
 ponder.on("BleuNFT:Mint", async ({event, context}) => {
@@ -11,7 +11,7 @@ ponder.on("FullBleuNFT:NFTMinted", async ({event, context}) => {
   console.log(event)
   const accountRow = await context.db.insert(accounts).values({
     address: event.args.to,
-    total_staked: 0,
+    totalStaked: 0,
   }).onConflictDoNothing();
 
   const tokenRow = await context.db.insert(tokens).values({
@@ -47,19 +47,15 @@ ponder.on("FullBleuNFT:NFTStaked", async ({event, context}) => {
   
   // Check if the account exists
   if (accountRow) {
-    const new_total_staked = accountRow.total_staked + 1
-    if (accountRow.attestationUID) {
-      revokeAttestation(accountRow.attestationUID)
-    }
-    const newAttestationUID = issueAttestation({
-      recipient: accountRow.address,
-      level: "level " + new_total_staked + " staker",
-      reason: "staked " + new_total_staked + " NFT's" ,
+    const newTotalStaked = accountRow.totalStaked + 1
+    const newAttestationUID = manageAccountAttestation({
+      account: accountRow,
+      newTotalStaked: newTotalStaked,
     })
     await context.db
       .update(accounts, { address: tokenRow.owner })
       .set({ 
-        total_staked: new_total_staked,
+        totalStaked: newTotalStaked,
         attestationUID: newAttestationUID,
        });
   }
@@ -84,19 +80,15 @@ ponder.on("FullBleuNFT:NFTUnstaked", async ({event, context}) => {
   
   // Check if the account exists
   if (accountRow) {
-    const new_total_staked = accountRow.total_staked - 1;
-    if (accountRow.attestationUID) {
-      revokeAttestation(accountRow.attestationUID)
-    }
-    const newAttestationUID = issueAttestation({
-      recipient: accountRow.address,
-      level: "level " + new_total_staked + " staker",
-      reason: "staked " + new_total_staked + " NFT's" ,
+    const newTotalStaked = accountRow.totalStaked - 1;
+    const newAttestationUID = manageAccountAttestation({
+      account: accountRow,
+      newTotalStaked: newTotalStaked,
     })
     await context.db
       .update(accounts, { address: tokenRow.owner })
       .set({ 
-        total_staked: new_total_staked,
+        totalStaked: newTotalStaked,
         attestationUID: newAttestationUID,
        });
   }
