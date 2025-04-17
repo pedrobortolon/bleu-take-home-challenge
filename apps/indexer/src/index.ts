@@ -2,23 +2,17 @@ import { ponder } from 'ponder:registry';
 import { accounts, tokens, events } from "../ponder.schema"
 import { manageAccountAttestation } from "./eas_atestation"
 
+const attestationEnabled = process.env.ATTESTATION_ENABLED
 
-ponder.on("BleuNFT:Mint", async ({event, context}) => {
-  console.log(event)
-});
+// ponder.on("BleuNFT:Mint", async ({event, context}) => {
+//   console.log(event)
+// });
 
 ponder.on("FullBleuNFT:NFTMinted", async ({event, context}) => {
-  console.log(event)
   const accountRow = await context.db.insert(accounts).values({
     address: event.args.to,
     totalStaked: 0,
   }).onConflictDoNothing();
-
-  const tokenRow = await context.db.insert(tokens).values({
-    id: event.args.tokenId,
-    owner: event.args.to,
-    staked: false,
-  });
 
   const eventRow = await context.db.insert(events).values({
     id: event.log.id,
@@ -40,10 +34,7 @@ ponder.on("FullBleuNFT:NFTStaked", async ({event, context}) => {
     .update(tokens, { id: event.args.tokenId })
     .set({ staked: true });
 
-  const accountRow = await context.db
-    .select(accounts)
-    .where({ address: tokenRow.owner })
-    .get();
+  const accountRow = await context.db.find(accounts, {address: event.args.to});
   
   // Check if the account exists
   if (accountRow) {
@@ -73,10 +64,7 @@ ponder.on("FullBleuNFT:NFTUnstaked", async ({event, context}) => {
     .update(tokens, { id: event.args.tokenId })
     .set({ staked: false });
 
-  const accountRow = await context.db
-    .select(accounts)
-    .where({ address: tokenRow.owner })
-    .get();
+  const accountRow = await context.db.find(accounts, {address: event.args.to});
   
   // Check if the account exists
   if (accountRow) {
@@ -95,15 +83,18 @@ ponder.on("FullBleuNFT:NFTUnstaked", async ({event, context}) => {
 });
 
 ponder.on("FullBleuNFT:Transfer", async ({event, context}) => {
-  const eventRow = await context.db.insert(events).values({
+
+  await context.db.insert(events).values({
     id: event.log.id,
     event: event.name,
     token: event.args.tokenId,
     timestamp: event.block.timestamp,
   });
-  console.log(event.args)
-
-  const tokenRow = await context.db
-    .update(tokens, { id: event.args.tokenId })
-    .set({ owner: event.args.to });
+  await context.db.insert(tokens)
+  .values({
+    id: event.args.tokenId,
+    owner: event.args.to,
+    staked: false,
+  })
+  .onConflictDoUpdate((token) => ({ owner: event.args.to}));
 });
