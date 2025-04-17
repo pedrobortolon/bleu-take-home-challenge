@@ -1,9 +1,10 @@
 import { index, onchainTable, relations } from 'ponder';
-import FullBleuNFT from "abis/FullBleuNFTAbi.ts";
 
 export const accounts = onchainTable('accounts',
   (t) => ({
     address: t.hex().primaryKey(),
+    total_staked: t.integer().notNull(),
+    attestationUID : t.hex(),
   }),
   (table) => ({
     addressIdx: index().on(table.address),
