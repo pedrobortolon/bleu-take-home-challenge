@@ -51,3 +51,17 @@ ponder.on("FullBleuNFT:NFTUnstaked", async ({event, context}) => {
     .update(tokens, { id: event.args.tokenId })
     .set({ staked: false });
 });
+
+ponder.on("FullBleuNFT:Transfer", async ({event, context}) => {
+  const eventRow = await context.db.insert(events).values({
+    id: event.log.id,
+    event: event.name,
+    token: event.args.tokenId,
+    timestamp: event.block.timestamp,
+  });
+  console.log(event.args)
+
+  const tokenRow = await context.db
+    .update(tokens, { id: event.args.tokenId })
+    .set({ owner: event.args.to });
+});
