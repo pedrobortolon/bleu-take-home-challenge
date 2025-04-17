@@ -43,6 +43,17 @@ app.get("/tokens/id/address/:address", async (c) => {
   return c.json(tokenIds);
 });
 
+app.get("/total-staked", async (c) => {
+  const tokens = await db
+      .select()
+      .from(schema.tokens)
+      .where(
+        eq(schema.tokens.staked, true)
+      );
+
+  return c.json(tokens);
+});
+
 app.get("/tokens/:address/staked", async (c) => {
     const address = getAddress(c.req.param("address"));
 
@@ -121,24 +132,25 @@ app.get("/events/address/:address", async (c) => {
     return c.json(events);
 });
 
-app.get("/top-holders/:n", async (c) => {
-    const n = Number(c.req.param("n"));
-  
-    const result = await db
-      .select({
-        address: schema.accounts.address,
-        tokenCount: count(schema.tokens.id),
-      })
-      .from(schema.accounts)
-      .leftJoin(
-        schema.tokens,
-        eq(schema.accounts.address, schema.tokens.owner)
-      )
-      .groupBy(schema.accounts.address)
-      .orderBy(desc(count(schema.tokens.id)))
-      .limit(n);
-  
-    return c.json(result);
-  });  
+app.get("/top-stakers/:n", async (c) => {
+  const n = Number(c.req.param("n"));
+
+  const result = await db
+    .select({
+      address: schema.accounts.address,
+      tokenCount: count(schema.tokens.id),
+    })
+    .from(schema.accounts)
+    .leftJoin(
+      schema.tokens,
+      and(eq(schema.accounts.address, schema.tokens.owner),
+      eq(schema.tokens.staked), true)
+    )
+    .groupBy(schema.accounts.address)
+    .orderBy(desc(count(schema.tokens.id)))
+    .limit(n);
+
+  return c.json(result);
+});  
 
 export default app;
