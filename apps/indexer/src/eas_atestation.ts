@@ -1,5 +1,5 @@
 import  { EAS, SchemaEncoder }  from "@ethereum-attestation-service/eas-sdk";
-import { Wallet, JsonRpcProvider } from "ethers";
+import { Wallet, JsonRpcProvider, utils } from "ethers";
 const easContractAddress = "0xC2679fBD37d54388Ce493F1DB75320D236e1815e";
 const schemaUID = "0x7996c7036f295c54113234996abab368215551df51e364362b04a6e833b99d70";
 const eas = new EAS(easContractAddress);
@@ -29,17 +29,21 @@ const issueAttestation = async ({ recipient, level, reason }) => {
 	return newAttestationUID;
 };
 
-const revokeAttestation = async ({ attestationUID }) => {
+const revokeAttestation = async (attestationUID) => {
 	await eas.connect(signer);
+	const data = utils.formatBytes32String(attestationUID);
+	const transaction = await eas.revokeOffchain(data);
+	await transaction.wait();
+
 	const tx = await eas.revoke({ uid: attestationUID });
 	await tx.wait();
 }
 
 export const manageAccountAttestation = async ({ account, newTotalStaked }) => {
-	if (account.attestationUID) {
-		revokeAttestation(account.attestationUID)
-	}
-	const newAttestationUID = issueAttestation({
+	// if (account.attestationUID) {
+	// 	revokeAttestation(account.attestationUID)
+	// }
+	const newAttestationUID = await issueAttestation({
 		recipient: account.address,
 		level: "level " + newTotalStaked + " staker",
 		reason: "staked " + newTotalStaked + " NFT's" ,
