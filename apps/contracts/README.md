@@ -4,14 +4,14 @@ This directory contains the smart contract implementation for the Bleu NFT staki
 
 ## Key Features
 
-- ERC721 NFT implementation (`BleuNFT`)
+- ERC721 NFT implementation (`FullBleuNFT`)
 - Minting functionality
 - Staking/Unstaking capabilities
 - Event emissions for tracking state changes
 
 ## Contract Architecture
 
-The main contract `BleuNFT` inherits from OpenZeppelin's ERC721 and implements:
+The main contract `FullBleuNFT` inherits from OpenZeppelin's ERC721 and implements:
 
 - `mintNFT()`: Allows users to mint new NFTs
 - `stake()`: Enables NFT staking
@@ -58,7 +58,7 @@ forge test
 To deploy to a testnet (e.g., Sepolia):
 
 ```bash
-forge script script/BleuNFT.s.sol:BleuNFTScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+forge script script/FullBleuNFT.s.sol:FullBleuNFTScript --rpc-url <your_rpc_url> --private-key <your_private_key>
 ```
 
 ## Contract Verification
@@ -66,7 +66,7 @@ forge script script/BleuNFT.s.sol:BleuNFTScript --rpc-url <your_rpc_url> --priva
 After deployment, verify your contract:
 
 ```bash
-forge verify-contract <deployed-address> src/BleuNFT.sol:BleuNFT --chain sepolia
+forge verify-contract <deployed-address> src/FullBleuNFT.sol:FullBleuNFT --chain sepolia
 ```
 
 ## Testing
