@@ -71,16 +71,23 @@ ponder.on("FullBleuNFT:NFTUnstaked", async ({event, context}) => {
     .set({ staked: false });
 
   const accountRow = await context.db.find(accounts, {address: event.args.staker});
-  
-  // Check if the account exists
+
   if (accountRow && attestationEnabled) {
     const newTotalStaked = accountRow.totalStaked - 1;
     const newAttestationUID = manageAccountAttestation({
       account: accountRow,
       newTotalStaked: newTotalStaked,
-    })
+    });
     await context.db
       .update(accounts, { address: accountRow.address })
+      .set({ 
+        totalStaked: newTotalStaked,
+        attestationUID: newAttestationUID,
+       });
+  } else if (accountRow) {
+    const newTotalStaked = accountRow.totalStaked - 1
+    await context.db
+      .update(accounts, { address: tokenRow.owner })
       .set({ 
         totalStaked: newTotalStaked,
        });
