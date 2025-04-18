@@ -5,7 +5,7 @@ import { ethers } from 'ethers';
 import { Button } from './ui/button';
 import { useState } from 'react';
 
-export default function MintNFTButton() {
+export default function MintNFTButton({ onMintComplete }: { onMintComplete?: () => void }) {
   const { address } = useAccount();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -31,6 +31,7 @@ export default function MintNFTButton() {
 
       const tx = await contract.mintNFT(address);
       await tx.wait();
+      onMintComplete?.();
       } catch (err: any) {
         console.error(err);
         setError(err.message);

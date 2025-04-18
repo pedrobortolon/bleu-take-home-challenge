@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import NFTItem from "./ntf-item";
 import axios from "axios";
 
-export default function NFTInfo() {
+export default function NFTInfo({ refreshTrigger }: { refreshTrigger: number }) {
     const { address } = useAccount();
     const [tokenIds, setTokens] = useState([]);
 
@@ -21,7 +21,7 @@ export default function NFTInfo() {
     };
 
     fetchTokens();
-  }, [address]);
+  }, [address, refreshTrigger]);
 
     return (
         <div>
